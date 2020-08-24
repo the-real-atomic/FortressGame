@@ -13,12 +13,14 @@ import static org.lwjgl.opengl.GL20.glUseProgram;
 
 public class ShaderProgram {
 	public static final int LOG_SIZE = 512;
+	public static final String VERT_EXTENSION = ".vert";
+	public static final String FRAG_EXTENSION = ".frag";
 
 	private final int id;
 
 	public ShaderProgram(String path) {
-		Shader vertexShader = new Shader(path+".glv", GL_VERTEX_SHADER);
-		Shader fragmentShader = new Shader(path+".glf", GL_FRAGMENT_SHADER);
+		Shader vertexShader = new Shader(path + VERT_EXTENSION, GL_VERTEX_SHADER);
+		Shader fragmentShader = new Shader(path + FRAG_EXTENSION, GL_FRAGMENT_SHADER);
 
 		id = glCreateProgram();
 		glAttachShader(id, vertexShader.id);
