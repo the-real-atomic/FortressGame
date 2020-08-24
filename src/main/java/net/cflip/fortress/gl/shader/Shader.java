@@ -4,12 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static org.lwjgl.opengl.GL20.glAttachShader;
 import static org.lwjgl.opengl.GL20.glCompileShader;
 import static org.lwjgl.opengl.GL20.glCreateShader;
+import static org.lwjgl.opengl.GL20.glDeleteShader;
+import static org.lwjgl.opengl.GL20.glDetachShader;
 import static org.lwjgl.opengl.GL20.glShaderSource;
 
 public class Shader {
-	public int id;
+	private int id;
+	private int programId;
 
 	public Shader(String sourcePath, int type) {
 		String source;
@@ -24,6 +28,16 @@ public class Shader {
 		glCompileShader(id);
 
 		// I don't check for errors here because they will be reported in the program's link error log
+	}
+
+	public void attachToProgram(int programId) {
+		this.programId = programId;
+		glAttachShader(programId, id);
+	}
+
+	public void delete() {
+		glDetachShader(programId, id);
+		glDeleteShader(id);
 	}
 
 	// TODO: This is just a generic file reading function that can go somewhere else

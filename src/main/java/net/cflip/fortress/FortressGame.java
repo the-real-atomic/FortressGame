@@ -33,5 +33,6 @@ public class FortressGame {
 		}
 
 		model.delete();
+		shader.delete();
 	}
 }
