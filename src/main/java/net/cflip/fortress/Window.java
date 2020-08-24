@@ -14,7 +14,7 @@ import static org.lwjgl.glfw.GLFW.glfwWindowHint;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public class Window {
-	private long window;
+	private final long window;
 
 	public Window(int width, int height, String title) {
 		if (!glfwInit())
