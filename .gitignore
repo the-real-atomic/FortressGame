@@ -1,2 +1,5 @@
 .gradle
 .idea
+
+# JVM crashes create .log files
+*.log
