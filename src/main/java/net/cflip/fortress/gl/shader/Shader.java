@@ -1,5 +1,7 @@
 package net.cflip.fortress.gl.shader;
 
+import net.cflip.fortress.gl.GLObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,8 +13,7 @@ import static org.lwjgl.opengl.GL20.glDeleteShader;
 import static org.lwjgl.opengl.GL20.glDetachShader;
 import static org.lwjgl.opengl.GL20.glShaderSource;
 
-public class Shader {
-	private int id;
+public class Shader extends GLObject {
 	private int programId;
 
 	public Shader(String sourcePath, int type) {
@@ -30,14 +31,24 @@ public class Shader {
 		// I don't check for errors here because they will be reported in the program's link error log
 	}
 
+	@Override
+	public void bind() {
+		// Shaders do not have a bind function
+	}
+
+	@Override
+	public void unbind() {}
+
 	public void attachToProgram(int programId) {
 		this.programId = programId;
 		glAttachShader(programId, id);
 	}
 
+	@Override
 	public void delete() {
 		glDetachShader(programId, id);
 		glDeleteShader(id);
+		invalidate();
 	}
 
 	// TODO: This is just a generic file reading function that can go somewhere else

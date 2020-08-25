@@ -39,7 +39,11 @@ public class Model {
 		vertexBuffer = new GLBuffer(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
 		indexBuffer = new GLBuffer(GL_ELEMENT_ARRAY_BUFFER, indexData, GL_STATIC_DRAW);
 
+		vertexBuffer.bind();
+		indexBuffer.bind();
+
 		vertexArray = new VertexArray();
+		vertexArray.bind();
 
 		VertexAttribute[] attributeList = {
 			new VertexAttribute(3, VertexAttributeFormat.FLOAT, false)
