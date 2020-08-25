@@ -25,12 +25,12 @@ public class FortressGame {
 
 		Model model = new Model(vertices, indices);
 
-		while (window.update()) {
+		do {
 			glClear(GL_COLOR_BUFFER_BIT);
 			glClearColor(0.1f, 0.1f, 0.2f, 1.0f);
 
 			model.render(shader);
-		}
+		} while (window.update());
 
 		model.delete();
 		shader.delete();
