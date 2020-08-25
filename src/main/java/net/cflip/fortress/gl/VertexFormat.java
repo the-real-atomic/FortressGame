@@ -16,7 +16,7 @@ public class VertexFormat {
 
 		for (int i = 0; i < attributes.length; i++) {
 			VertexAttribute attribute = attributes[i];
-			glVertexAttribPointer(i, attribute.elementCount, attribute.format, attribute.normalized, 0, bytesSoFar);
+			glVertexAttribPointer(i, attribute.elementCount, attribute.format.glIdentifier, attribute.normalized, 0, bytesSoFar);
 			bytesSoFar += attribute.byteCount;
 		}
 	}
