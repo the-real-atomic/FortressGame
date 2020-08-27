@@ -1,4 +1,4 @@
-package net.cflip.fortress.gl;
+package net.cflip.fortress.gl.vertex;
 
 public class VertexAttribute {
 	public VertexAttributeFormat format;

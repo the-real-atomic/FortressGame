@@ -1,4 +1,4 @@
-package net.cflip.fortress.gl;
+package net.cflip.fortress.gl.vertex;
 
 import java.util.ArrayList;
 import java.util.List;

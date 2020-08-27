@@ -1,6 +1,8 @@
 package net.cflip.fortress.gl;
 
 import net.cflip.fortress.gl.shader.ShaderProgram;
+import net.cflip.fortress.gl.vertex.VertexAttributeFormat;
+import net.cflip.fortress.gl.vertex.VertexFormat;
 
 import java.nio.ByteBuffer;
 

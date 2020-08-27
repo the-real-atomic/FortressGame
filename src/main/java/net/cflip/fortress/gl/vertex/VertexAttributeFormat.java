@@ -1,4 +1,4 @@
-package net.cflip.fortress.gl;
+package net.cflip.fortress.gl.vertex;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 
