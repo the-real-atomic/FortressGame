@@ -2,6 +2,9 @@ package net.cflip.fortress;
 
 import net.cflip.fortress.gl.Model;
 import net.cflip.fortress.gl.shader.ShaderProgram;
+import org.lwjgl.BufferUtils;
+
+import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
@@ -20,10 +23,18 @@ public class FortressGame {
 
 		byte[] indices = { 0, 1, 3, 3, 1, 2 };
 
+		ByteBuffer vertexData = BufferUtils.createByteBuffer(vertices.length * Float.BYTES);
+		for (float value : vertices) vertexData.putFloat(value);
+		vertexData.flip();
+
+		ByteBuffer indexData = BufferUtils.createByteBuffer(indices.length);
+		indexData.put(indices);
+		indexData.flip();
+
 		ShaderProgram shader = new ShaderProgram("/glsl/basic");
 		shader.bind();
 
-		Model model = new Model(vertices, indices);
+		Model model = new Model(vertexData, indexData);
 
 		do {
 			glClear(GL_COLOR_BUFFER_BIT);

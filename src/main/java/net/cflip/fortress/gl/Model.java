@@ -1,7 +1,6 @@
 package net.cflip.fortress.gl;
 
 import net.cflip.fortress.gl.shader.ShaderProgram;
-import org.lwjgl.BufferUtils;
 
 import java.nio.ByteBuffer;
 
@@ -21,20 +20,8 @@ public class Model {
 
 	private final VertexFormat vertexFormat;
 
-	public Model(float[] vertices, byte[] indices) {
-		vertexCount = indices.length;
-
-		ByteBuffer vertexData = BufferUtils.createByteBuffer(vertices.length * Float.BYTES);
-		ByteBuffer indexData = BufferUtils.createByteBuffer(indices.length);
-
-		for (float vertex : vertices)
-			vertexData.putFloat(vertex);
-
-		for (byte index : indices)
-			indexData.put(index);
-
-		vertexData.flip();
-		indexData.flip();
+	public Model(ByteBuffer vertexData, ByteBuffer indexData) {
+		vertexCount = indexData.limit();
 
 		vertexBuffer = new GLBuffer(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
 		indexBuffer = new GLBuffer(GL_ELEMENT_ARRAY_BUFFER, indexData, GL_STATIC_DRAW);
