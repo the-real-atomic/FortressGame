@@ -32,11 +32,10 @@ public class Model {
 		vertexArray = new VertexArray();
 		vertexArray.bind();
 
-		VertexAttribute[] attributeList = {
-			new VertexAttribute(3, VertexAttributeFormat.FLOAT, false)
-		};
+		vertexFormat = new VertexFormat.Builder()
+			.addAttribute(3, VertexAttributeFormat.FLOAT, false)
+			.build();
 
-		vertexFormat = new VertexFormat(attributeList);
 		vertexFormat.bindAttribs();
 	}
 
