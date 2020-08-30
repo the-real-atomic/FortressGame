@@ -4,6 +4,10 @@ public abstract class GLObject {
 	private static final int INVALID_ID = -1;
 	protected int id;
 
+	public GLObject(int id) {
+		this.id = id;
+	}
+
 	protected void checkValidity() {
 		if (id <= 0) throw new IllegalStateException("OpenGL object has invalid ID");
 	}

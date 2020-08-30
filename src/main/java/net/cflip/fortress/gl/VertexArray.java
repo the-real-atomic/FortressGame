@@ -6,7 +6,7 @@ import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
 public class VertexArray extends GLObject {
 	public VertexArray() {
-		id = glGenVertexArrays();
+		super(glGenVertexArrays());
 	}
 
 	@Override

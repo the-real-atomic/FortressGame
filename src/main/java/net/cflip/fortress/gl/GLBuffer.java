@@ -11,8 +11,8 @@ public class GLBuffer extends GLObject {
 	private final int bindTarget;
 
 	public GLBuffer(int bindTarget, ByteBuffer data, int usage) {
+		super(glGenBuffers());
 		this.bindTarget = bindTarget;
-		id = glGenBuffers();
 		bind();
 		glBufferData(bindTarget, data, usage);
 		unbind();

@@ -22,10 +22,11 @@ public class ShaderProgram extends GLObject {
 	private final Shader fragmentShader;
 
 	public ShaderProgram(String path) {
+		super(glCreateProgram());
+
 		vertexShader = new Shader(path + VERT_EXTENSION, GL_VERTEX_SHADER);
 		fragmentShader = new Shader(path + FRAG_EXTENSION, GL_FRAGMENT_SHADER);
 
-		id = glCreateProgram();
 		vertexShader.attachToProgram(id);
 		fragmentShader.attachToProgram(id);
 		glLinkProgram(id);

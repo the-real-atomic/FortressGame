@@ -17,6 +17,8 @@ public class Shader extends GLObject {
 	private int programId;
 
 	public Shader(String sourcePath, int type) {
+		super(glCreateShader(type));
+
 		String source;
 		try {
 			source = readSource(sourcePath);
@@ -24,7 +26,6 @@ public class Shader extends GLObject {
 			throw new RuntimeException("Failed to read shader source from file at " + e.getMessage());
 		}
 
-		id = glCreateShader(type);
 		glShaderSource(id, source);
 		glCompileShader(id);
 
