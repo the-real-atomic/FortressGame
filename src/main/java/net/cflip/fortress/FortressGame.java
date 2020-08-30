@@ -2,6 +2,9 @@ package net.cflip.fortress;
 
 import net.cflip.fortress.gl.Model;
 import net.cflip.fortress.gl.shader.ShaderProgram;
+import net.cflip.fortress.gl.vertex.VertexAttributeFormat;
+import net.cflip.fortress.gl.vertex.VertexData;
+import net.cflip.fortress.gl.vertex.VertexFormat;
 import org.lwjgl.BufferUtils;
 
 import java.nio.ByteBuffer;
@@ -14,18 +17,22 @@ public class FortressGame {
 	public static void main(String[] args) {
 		Window window = new Window(1280, 720, "Fortress Game");
 
-		float[] vertices = {
-			-0.5f,  0.5f, 0,
-			-0.5f, -0.5f, 0,
-			0.5f, -0.5f, 0,
-			0.5f,  0.5f, 0,
+		Float[] vertices = {
+			-0.5f,  0.5f, 0f,
+			-0.5f, -0.5f, 0f,
+			0.5f, -0.5f, 0f,
+			0.5f,  0.5f, 0f,
 		};
 
 		byte[] indices = { 0, 1, 3, 3, 1, 2 };
 
-		ByteBuffer vertexData = BufferUtils.createByteBuffer(vertices.length * Float.BYTES);
-		for (float value : vertices) vertexData.putFloat(value);
-		vertexData.flip();
+		VertexFormat vertexFormat = new VertexFormat.Builder()
+			.addAttribute(3, VertexAttributeFormat.FLOAT, false)
+			.build();
+
+		VertexData vertexData = new VertexData.Builder(vertexFormat, 4)
+			.addData(vertices, 0)
+			.build();
 
 		ByteBuffer indexData = BufferUtils.createByteBuffer(indices.length);
 		indexData.put(indices);

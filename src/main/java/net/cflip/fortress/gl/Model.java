@@ -1,8 +1,7 @@
 package net.cflip.fortress.gl;
 
 import net.cflip.fortress.gl.shader.ShaderProgram;
-import net.cflip.fortress.gl.vertex.VertexAttributeFormat;
-import net.cflip.fortress.gl.vertex.VertexFormat;
+import net.cflip.fortress.gl.vertex.VertexData;
 
 import java.nio.ByteBuffer;
 
@@ -20,12 +19,14 @@ public class Model {
 
 	private final int vertexCount;
 
-	private final VertexFormat vertexFormat;
+	private VertexData vertexData;
 
-	public Model(ByteBuffer vertexData, ByteBuffer indexData) {
+	public Model(VertexData vertexData, ByteBuffer indexData) {
+		this.vertexData = vertexData;
+
 		vertexCount = indexData.limit();
 
-		vertexBuffer = new GLBuffer(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
+		vertexBuffer = new GLBuffer(GL_ARRAY_BUFFER, vertexData.buffer, GL_STATIC_DRAW);
 		indexBuffer = new GLBuffer(GL_ELEMENT_ARRAY_BUFFER, indexData, GL_STATIC_DRAW);
 
 		vertexBuffer.bind();
@@ -34,11 +35,7 @@ public class Model {
 		vertexArray = new VertexArray();
 		vertexArray.bind();
 
-		vertexFormat = new VertexFormat.Builder()
-			.addAttribute(3, VertexAttributeFormat.FLOAT, false)
-			.build();
-
-		vertexFormat.bindAttribs();
+		vertexData.format.bindAttribs();
 	}
 
 	public void delete() {
@@ -49,7 +46,7 @@ public class Model {
 
 	public void render(ShaderProgram shader) {
 		vertexArray.bind();
-		vertexFormat.enableAttribs();
+		vertexData.format.enableAttribs();
 
 		vertexBuffer.bind();
 		indexBuffer.bind();
@@ -58,6 +55,6 @@ public class Model {
 
 		glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_BYTE, 0);
 
-		vertexFormat.disableAttribs();
+		vertexData.format.disableAttribs();
 	}
 }

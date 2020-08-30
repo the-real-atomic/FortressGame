@@ -36,6 +36,20 @@ public class VertexFormat {
 		}
 	}
 
+	public VertexAttribute getAttribute(int index) {
+		return attributes.get(index);
+	}
+
+	public int getTotalBytes() {
+		int totalBytes = 0;
+
+		for (VertexAttribute attribute : attributes) {
+			totalBytes += attribute.byteCount;
+		}
+
+		return totalBytes;
+	}
+
 	public static final class Builder {
 		private final List<VertexAttribute> attributeList;
 
