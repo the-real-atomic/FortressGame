@@ -12,15 +12,18 @@ public class VertexFormat {
 
 	public VertexFormat(List<VertexAttribute> attributes) {
 		this.attributes = attributes;
+
+		int bytesSoFar = 0;
+		for (VertexAttribute attribute : attributes) {
+			attribute.stride = bytesSoFar;
+			bytesSoFar += attribute.byteCount;
+		}
 	}
 
 	public void bindAttribs() {
-		int bytesSoFar = 0;
-
 		for (int i = 0; i < attributes.size(); i++) {
 			VertexAttribute attribute = attributes.get(i);
-			glVertexAttribPointer(i, attribute.elementCount, attribute.format.glIdentifier, attribute.normalized, 0, bytesSoFar);
-			bytesSoFar += attribute.byteCount;
+			glVertexAttribPointer(i, attribute.elementCount, attribute.format.glIdentifier, attribute.normalized, 0, attribute.stride);
 		}
 	}
 

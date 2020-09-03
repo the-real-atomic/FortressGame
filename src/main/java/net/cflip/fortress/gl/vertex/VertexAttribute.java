@@ -5,6 +5,7 @@ public class VertexAttribute {
 	public int byteCount;
 	public int elementCount;
 	public boolean normalized;
+	public int stride;
 
 	public VertexAttribute(int elementCount, VertexAttributeFormat format, boolean normalized) {
 		this.format = format;
