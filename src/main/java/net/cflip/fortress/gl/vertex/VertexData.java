@@ -3,6 +3,7 @@ package net.cflip.fortress.gl.vertex;
 import org.lwjgl.BufferUtils;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 public class VertexData {
 	public final ByteBuffer buffer;
@@ -34,7 +35,13 @@ public class VertexData {
 			if (data.length != expectedSize)
 				throw new IllegalArgumentException("Data array length does not match expected size");
 
-			attribute.format.bufferWriter.writeToBuffer(data, buffer);
+			for (int i = 0; i < vertexCount; i++) {
+				int bufferIndex = i * vertexFormat.getTotalBytes() + attribute.stride;
+				int copyStart = i * attribute.elementCount;
+
+				T[] section = Arrays.copyOfRange(data, copyStart, copyStart + attribute.elementCount);
+				attribute.format.bufferWriter.writeToBuffer(section, buffer, bufferIndex);
+			}
 
 			return this;
 		}
