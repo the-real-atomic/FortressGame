@@ -1,11 +1,19 @@
+import org.gradle.internal.os.OperatingSystem
+
 plugins {
     id 'java'
+    id 'application'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group 'net.cflip'
+version '0.0.1-ALPHA'
 
-import org.gradle.internal.os.OperatingSystem
+application {
+    mainClassName = "net.cflip.fortress.FortressGame"
+
+    if (OperatingSystem.current() == OperatingSystem.MAC_OS)
+        applicationDefaultJvmArgs = ['-XstartOnFirstThread']
+}
 
 project.ext.lwjglVersion = "3.2.3"
 project.ext.jomlVersion = "1.9.25"
