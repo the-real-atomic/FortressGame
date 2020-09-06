@@ -6,12 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static org.lwjgl.opengl.GL20.glAttachShader;
-import static org.lwjgl.opengl.GL20.glCompileShader;
-import static org.lwjgl.opengl.GL20.glCreateShader;
-import static org.lwjgl.opengl.GL20.glDeleteShader;
-import static org.lwjgl.opengl.GL20.glDetachShader;
-import static org.lwjgl.opengl.GL20.glShaderSource;
+import static org.lwjgl.opengl.GL11.GL_FALSE;
+import static org.lwjgl.opengl.GL20.*;
 
 public class Shader extends GLObject {
 	private int programId;
@@ -29,7 +25,8 @@ public class Shader extends GLObject {
 		glShaderSource(id, source);
 		glCompileShader(id);
 
-		// I don't check for errors here because they will be reported in the program's link error log
+		if (glGetShaderi(id, GL_COMPILE_STATUS) == GL_FALSE)
+			throw new RuntimeException("Failed to compile shader\n" + glGetShaderInfoLog(id, ShaderProgram.LOG_SIZE));
 	}
 
 	@Override
